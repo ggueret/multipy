@@ -7,7 +7,7 @@ ENV PYTHON_35_VERSION 3.5.7
 ENV PYTHON_34_VERSION 3.4.10
 ENV PYTHON_27_VERSION 2.7.16
 
-RUN apt-get update && apt-get install -y build-essential curl make libffi-dev libssl-dev zlib1g-dev && \
+RUN apt-get update && apt-get install -y build-essential curl make libffi6 libffi-dev libssl1.1 libssl-dev zlib1g zlib1g-dev && \
 	mkdir /tmp/python && \
 	# Python 3.7
 	cd /tmp/python && curl -sL https://www.python.org/ftp/python/$PYTHON_37_VERSION/Python-$PYTHON_37_VERSION.tgz > Python-$PYTHON_37_VERSION.tgz && \
