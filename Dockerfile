@@ -1,6 +1,7 @@
-FROM debian:stretch
+FROM debian:buster
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV PYTHON_38_VERSION 3.8.1
 ENV PYTHON_37_VERSION 3.7.3
 ENV PYTHON_36_VERSION 3.6.8
 ENV PYTHON_35_VERSION 3.5.7
@@ -9,6 +10,10 @@ ENV PYTHON_27_VERSION 2.7.16
 
 RUN apt-get update && apt-get install -y build-essential curl make libffi6 libffi-dev libssl1.1 libssl-dev zlib1g zlib1g-dev && \
 	mkdir /tmp/python && \
+	# Python 3.8
+	cd /tmp/python && curl -sL https://www.python.org/ftp/python/$PYTHON_38_VERSION/Python-$PYTHON_38_VERSION.tgz > Python-$PYTHON_38_VERSION.tgz && \
+	tar xf Python-$PYTHON_38_VERSION.tgz && cd Python-$PYTHON_38_VERSION/ && \
+	./configure && make -j$(nproc) build_all && make altinstall && \
 	# Python 3.7
 	cd /tmp/python && curl -sL https://www.python.org/ftp/python/$PYTHON_37_VERSION/Python-$PYTHON_37_VERSION.tgz > Python-$PYTHON_37_VERSION.tgz && \
 	tar xf Python-$PYTHON_37_VERSION.tgz && cd Python-$PYTHON_37_VERSION/ && \
